@@ -22,16 +22,14 @@
             user-select: none;
         }
 
-        /* Conteneur pour aligner le bandeau et l'image */
         .media-container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* LE NOUVEAU BANDEAU SAUTILLANT */
         .cute-label {
-            display: none; /* Caché au début ! */
+            display: none; 
             background-color: #ff4d79;
             color: white;
             padding: 8px 20px;
@@ -40,10 +38,9 @@
             font-size: 1.2rem;
             margin-bottom: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            animation: bounce 1s infinite; /* Animation qui le fait sauter */
+            animation: bounce 1s infinite; 
         }
 
-        /* L'animation du saut */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -76,7 +73,9 @@
             gap: 20px; 
             justify-content: center;
             align-items: center;
-            z-index: 10; 
+            /* 👇 CORRECTION ICI POUR RENTRE LES BOUTONS CLIQUABLES 👇 */
+            position: relative; 
+            z-index: 999; 
             height: 60px; 
         }
 
@@ -90,6 +89,8 @@
             transition: transform 0.2s; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             -webkit-tap-highlight-color: transparent; 
+            /* S'assure que le bouton capte bien les clics */
+            pointer-events: auto; 
         }
 
         #yesBtn {
@@ -115,14 +116,13 @@
 
     <div class="media-container" id="imageContainer">
         <div id="bloomLabel" class="cute-label">⬇️ (c'est toi) ⬇️</div>
-        
         <img id="mainMedia" src="moi.jpg" alt="Nous deux">
     </div>
 
     <h1 id="question">Tu veux être ma Valentine ?</h1>
 
     <div class="buttons" id="btnGroup">
-        <button id="yesBtn" onclick="saidYes()">OUIIIIIIIII !</button>
+        <button id="yesBtn" onclick="saidYes()" ontouchstart="saidYes()">OUIIIIIIIII !</button>
         <button id="noBtn" onmouseover="runAway(event)" ontouchstart="runAway(event)">Non.</button>
     </div>
 
@@ -144,17 +144,22 @@
         }
 
         function saidYes() {
-            // 1. Change le texte
-            document.getElementById('question').innerText = "Y'a intérêt ouais.... JE T'AIMEEEEEEEE ❤️";
-            
-            // 2. Cache les boutons
+            document.getElementById('question').innerText = "Y'a intérêt ouais.... JE t'AIMEEEEEEEE ❤️";
             document.getElementById('btnGroup').style.display = 'none';
             
-            // 3. Affiche ton GIF Winx (assure-toi que winx.gif est bien sur ton GitHub !)
+            // N'oublie pas : ça doit être le nom exact de ton GIF Winx sur GitHub
             document.getElementById('mainMedia').src = "winx.gif"; 
 
-            // 4. AFFICHE LE BANDEAU SAUTILLANT !
             document.getElementById('bloomLabel').style.display = 'inline-block';
-            
-            // 5. Change le fond
-            document.body.style.backgroundColor = "#ffb3
+            document.body.style.backgroundColor = "#ffb3c6";
+
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#ff4d79', '#ffffff', '#d10047', '#ffb3c6']
+            });
+        }
+    </script>
+</body>
+</html>
