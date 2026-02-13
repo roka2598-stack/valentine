@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pour ma Valentine</title>
+    <style>
+        body {
+            background-color: #ffe6e6; 
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px; 
+            box-sizing: border-box;
+            /* Empêche la sélection de texte accidentelle sur iPad */
+            -webkit-user-select: none; 
+            user-select: none;
+        }
+
+        .media-container img {
+            max-width: 90vw; 
+            max-height: 40vh; 
+            width: auto;
+            height: auto;
+            object-fit: contain; 
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); 
+        }
+
+        h1 {
+            color: #d10047;
+            font-size: clamp(1.5rem, 4vw, 2.5rem); 
+            margin-bottom: 30px;
+            padding: 0 10px;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px; 
+            justify-content: center;
+            align-items: center;
+            z-index: 10; 
+            height: 60px; 
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            /* Évite le petit carré gris de sélection tactile sur Safari iOS */
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        #yesBtn {
+            background-color: #ff4d79;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #d10047;
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #d10047;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="media-container" id="imageContainer">
+        <img id="mainMedia" src="ma-photo-de-couple.jpg" alt="Nous deux">
+    </div>
+
+    <h1 id="question">Tu veux être ma Valentine ?</h1>
+
+    <div class="buttons" id="btnGroup">
+        <button id="yesBtn" onclick="saidYes()">OUIIIIIIIII !</button>
+        <button id="noBtn" onmouseover="runAway(event)" ontouchstart="runAway(event)">Non.</button>
+    </div>
+
+    <script>
+        function runAway(event) {
+            // Empêche le doigt de faire un "clic" si on touche l'écran
+            if (event) {
+                event.preventDefault();
+            }
+
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'fixed'; 
+            
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20) + 10;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20) + 10;
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function saidYes() {
+            document.getElementById('question').innerText = "Y'a intérêt ouais.... JE t'AIMEEEEEEEE ❤️";
+            document.getElementById('btnGroup').style.display = 'none';
+            
+            // Ton GIF Winx ici
+            document.getElementById('mainMedia').src = "https://media.tenor.com/b9hXmI9GkC0AAAAC/winx-club-bloom.gif"; 
+            
+            document.body.style.backgroundColor = "#ffb3c6";
+        }
+    </script>
+</body>
+</html>
