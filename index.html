@@ -22,6 +22,33 @@
             user-select: none;
         }
 
+        /* Conteneur pour aligner le bandeau et l'image */
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* LE NOUVEAU BANDEAU SAUTILLANT */
+        .cute-label {
+            display: none; /* Caché au début ! */
+            background-color: #ff4d79;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            animation: bounce 1s infinite; /* Animation qui le fait sauter */
+        }
+
+        /* L'animation du saut */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         .media-container img {
             max-width: 90vw; 
             max-height: 40vh; 
@@ -87,6 +114,8 @@
 <body>
 
     <div class="media-container" id="imageContainer">
+        <div id="bloomLabel" class="cute-label">⬇️ (c'est toi) ⬇️</div>
+        
         <img id="mainMedia" src="moi.jpg" alt="Nous deux">
     </div>
 
@@ -121,20 +150,11 @@
             // 2. Cache les boutons
             document.getElementById('btnGroup').style.display = 'none';
             
-            // 3. Affiche le GIF des Winx
+            // 3. Affiche ton GIF Winx (assure-toi que winx.gif est bien sur ton GitHub !)
             document.getElementById('mainMedia').src = "winx.gif"; 
-            
-            // 4. Change le fond
-            document.body.style.backgroundColor = "#ffb3c6";
 
-            // 5. 🎉 EXPLOSION DE CONFETTIS ! 🎉
-            confetti({
-                particleCount: 150,          // Nombre de confettis
-                spread: 100,                 // Écartement de l'explosion
-                origin: { y: 0.6 },          // Démarre un peu plus bas que le haut de l'écran
-                colors: ['#ff4d79', '#ffffff', '#d10047', '#ffb3c6'] // Couleurs personnalisées !
-            });
-        }
-    </script>
-</body>
-</html>
+            // 4. AFFICHE LE BANDEAU SAUTILLANT !
+            document.getElementById('bloomLabel').style.display = 'inline-block';
+            
+            // 5. Change le fond
+            document.body.style.backgroundColor = "#ffb3
